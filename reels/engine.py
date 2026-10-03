@@ -104,6 +104,8 @@ def shape_layer(draw_fn, w, h):
 
 def rrect(base, box, r, fill, alpha=1.0, outline=None, width=0):
     x0, y0, x1, y1 = [int(v) for v in box]
+    if x1 - x0 < 2 or y1 - y0 < 2:
+        return
     layer = Image.new("RGBA", (max(1, x1 - x0), max(1, y1 - y0)), (0, 0, 0, 0))
     ImageDraw.Draw(layer).rounded_rectangle(
         (0, 0, x1 - x0 - 1, y1 - y0 - 1), r, fill=fill + (int(255 * alpha),) if fill else None,
@@ -138,18 +140,24 @@ def header(base, a=1.0, dark_text=False):
 
 
 def footer(base, color=WHITE):
-    text(base, "@biyolojininrehberi", 38, W / 2, 1620, color, alpha=0.9)
+    """Intentionally empty: the channel handle only appears in the closing block."""
+    return
 
 
 def cta(base, top, alpha=1.0, scale=1.0, light=False):
-    """Closing brand block: channel name + Instagram / YouTube / website."""
-    h = 250
+    """Closing brand block: channel name, then web / YouTube / Instagram stacked."""
+    h = 340
     layer = Image.new("RGBA", (W, h), (0, 0, 0, 0))
     bgc, fg, accent = (NAVY, WHITE, YELLOW) if light else (YELLOW, NAVY, BLUE)
     rrect(layer, (60, 0, W - 60, h), 44, bgc)
-    text(layer, "BİYOLOJİ REHBERİ", 66, W / 2, 58, accent if light else NAVY)
-    text(layer, "Instagram  @biyolojininrehberi", 40, W / 2, 128, fg, maxw=940)
-    text(layer, "YouTube  @BiyoRehber   •   biyolojirehberi.com", 38, W / 2, 188, fg, maxw=940)
+    text(layer, "BİYOLOJİ REHBERİ", 64, W / 2, 60, accent if light else NAVY)
+    rows = [("WEB", "biyolojirehberi.com"), ("YOUTUBE", "@BiyoRehber"),
+            ("INSTAGRAM", "@biyolojininrehberi")]
+    for i, (lab, val) in enumerate(rows):
+        y = 148 + i * 66
+        pill(layer, lab, 28, 110, y - 28, accent if not light else BLUE, WHITE if not light else WHITE)
+        vl = text_layer(val, 44, fg, 600, "left")
+        layer.alpha_composite(vl, (400, int(y - vl.height / 2)))
     paste(base, layer, W / 2, top + h / 2, scale, alpha)
 
 

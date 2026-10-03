@@ -130,18 +130,18 @@ def scene(t):
     u = t - T_END
     img = bg(t)
     header(img)
-    text(img, "ENERJİ YOKSA", 100, W / 2, 470, WHITE, maxw=1000, scale=out_back(prog(u, 0.1, .5)))
-    text(img, "YAŞAM DA YOK!", 120, W / 2, 620, NEON, maxw=1000, scale=out_back(prog(u, 0.4, .5)))
+    text(img, "ENERJİ YOKSA", 100, W / 2, 380, WHITE, maxw=1000, scale=out_back(prog(u, 0.1, .5)))
+    text(img, "YAŞAM DA YOK!", 120, W / 2, 520, NEON, maxw=1000, scale=out_back(prog(u, 0.4, .5)))
     # bolt
     s = out_back(prog(u, 0.9, .6)) * (1 + 0.04 * math.sin(u * 6))
     bolt = [(560, 780), (410, 1030), (520, 1030), (470, 1290), (700, 960), (580, 960), (650, 780)]
-    cx, cy = W / 2, 1030
+    cx, cy = W / 2, 880
     pts = [(cx + (x - 540) * s, cy + (y - 1030) * s) for x, y in bolt]
     for g, a in ((22, .08), (12, .15)):
         circle(img, cx, cy, 190 * s + g * 4, NEON, a)
     ImageDraw.Draw(img).polygon(pts, fill=NEON + (255,))
-    text(img, "ATP = hücrenin enerji parası", 50, W / 2, 1330, WHITE, alpha=prog(u, 1.5, .4))
-    cta(img, 1400, alpha=prog(u, 2.4, .4), scale=1 + 0.02 * math.sin(u * 6))
+    text(img, "ATP = hücrenin enerji parası", 50, W / 2, 1185, WHITE, alpha=prog(u, 1.5, .4))
+    cta(img, 1255, alpha=prog(u, 2.4, .4), scale=1 + 0.02 * math.sin(u * 6))
     return img
 
 

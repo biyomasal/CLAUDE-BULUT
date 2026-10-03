@@ -118,10 +118,10 @@ def scene(t):
 
     if t >= T_END:
         u = t - T_END
-        rrect(img, (60, 1245, W - 60, 1365), 40, NAVY, alpha=0.96 * prog(u, 0, .3))
-        text(img, "Çoğu canlının enerji kaynağı: GÜNEŞ", 46, W / 2, 1305, WHITE, maxw=900,
+        rrect(img, (60, 1215, W - 60, 1315), 40, NAVY, alpha=0.96 * prog(u, 0, .3))
+        text(img, "Çoğu canlının enerji kaynağı: GÜNEŞ", 46, W / 2, 1265, WHITE, maxw=900,
              scale=out_back(prog(u, 0, .5)), alpha=prog(u, 0, .3))
-        cta(img, 1400, alpha=prog(u, 1.4, .4), scale=1 + 0.02 * math.sin(u * 6), light=True)
+        cta(img, 1340, alpha=prog(u, 1.4, .4), scale=1 + 0.02 * math.sin(u * 6), light=True)
     return img
 
 
