@@ -170,12 +170,12 @@ def vgradient(c0, c1):
     return img.resize((W, H)).convert("RGBA")
 
 
-def render(scene, seconds, out):
+def render(scene, seconds, out, crf=18, preset="medium"):
     ff = subprocess.Popen(
         ["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
          "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-f", "lavfi", "-i",
-         f"anullsrc=r=44100:cl=stereo", "-shortest", "-c:v", "libx264", "-preset", "medium",
-         "-crf", "18", "-pix_fmt", "yuv420p", "-c:a", "aac", "-movflags", "+faststart", out],
+         f"anullsrc=r=44100:cl=stereo", "-shortest", "-c:v", "libx264", "-preset", preset,
+         "-crf", str(crf), "-pix_fmt", "yuv420p", "-c:a", "aac", "-movflags", "+faststart", out],
         stdin=subprocess.PIPE)
     n = int(seconds * FPS)
     for i in range(n):
