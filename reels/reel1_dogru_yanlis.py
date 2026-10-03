@@ -51,7 +51,8 @@ def ring(base, cx, cy, r, frac, col):
 def scene(t):
     img = bg(t)
     header(img)
-    footer(img)
+    if t < T_END:
+        footer(img)
 
     if t < T_HOOK:
         p = out_back(prog(t, 0.0, 0.6))
@@ -66,12 +67,8 @@ def scene(t):
         u = t - T_END
         text(img, "3/3 yaptıysan", 80, W / 2, 620, WHITE, alpha=prog(u, 0, .4), scale=out_back(prog(u, 0, .5)))
         text(img, "ENERJİ\nUSTASISIN!", 150, W / 2, 880, YELLOW, scale=out_back(prog(u, .4, .6)))
-        text(img, "Enerji konusunun tüm soruları\nve cevapları kanalda", 52, W / 2, 1180, WHITE,
-             alpha=prog(u, 1.0, .5))
-        k = 1 + 0.04 * math.sin(u * 7)
-        w = 700 * k
-        rrect(img, (W / 2 - w / 2, 1330, W / 2 + w / 2, 1330 + 110 * k), 55, YELLOW, alpha=prog(u, 1.4, .4))
-        text(img, "TÜM CEVAPLAR KANALDA", 50, W / 2, 1385 + 0, NAVY, alpha=prog(u, 1.4, .4), scale=k)
+        text(img, "Daha fazla biyoloji için:", 52, W / 2, 1150, WHITE, alpha=prog(u, 1.0, .5))
+        cta(img, 1250, alpha=prog(u, 1.2, .4), scale=1 + 0.02 * math.sin(u * 6))
         return img
 
     i = int((t - T_HOOK) // T_Q)

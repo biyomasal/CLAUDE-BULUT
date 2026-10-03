@@ -129,13 +129,28 @@ def pill(base, s, size, x, y, bg, fg):
     return x + w
 
 
+LABELS = ("10. SINIF BİYOLOJİ", "BİY.10.1.1")
+
+
 def header(base, a=1.0, dark_text=False):
-    x = pill(base, "10. SINIF BİYOLOJİ", 38, 70, 150, BLUE, WHITE)
-    pill(base, "BİY.10.1.1", 38, x + 18, 150, YELLOW, NAVY)
+    x = pill(base, LABELS[0], 38, 70, 150, BLUE, WHITE)
+    pill(base, LABELS[1], 38, x + 18, 150, YELLOW, NAVY)
 
 
 def footer(base, color=WHITE):
     text(base, "@biyolojininrehberi", 38, W / 2, 1620, color, alpha=0.9)
+
+
+def cta(base, top, alpha=1.0, scale=1.0, light=False):
+    """Closing brand block: channel name + Instagram / YouTube / website."""
+    h = 250
+    layer = Image.new("RGBA", (W, h), (0, 0, 0, 0))
+    bgc, fg, accent = (NAVY, WHITE, YELLOW) if light else (YELLOW, NAVY, BLUE)
+    rrect(layer, (60, 0, W - 60, h), 44, bgc)
+    text(layer, "BİYOLOJİ REHBERİ", 66, W / 2, 58, accent if light else NAVY)
+    text(layer, "Instagram  @biyolojininrehberi", 40, W / 2, 128, fg, maxw=940)
+    text(layer, "YouTube  @BiyoRehber   •   biyolojirehberi.com", 38, W / 2, 188, fg, maxw=940)
+    paste(base, layer, W / 2, top + h / 2, scale, alpha)
 
 
 def vgradient(c0, c1):

@@ -140,12 +140,8 @@ def scene(t):
     for g, a in ((22, .08), (12, .15)):
         circle(img, cx, cy, 190 * s + g * 4, NEON, a)
     ImageDraw.Draw(img).polygon(pts, fill=NEON + (255,))
-    text(img, "ATP = hücrenin enerji parası", 50, W / 2, 1360, WHITE, alpha=prog(u, 1.5, .4))
-    if u > 2.4:
-        k = 1 + 0.04 * math.sin(u * 7)
-        rrect(img, (W / 2 - 360 * k, 1440, W / 2 + 360 * k, 1440 + 100), 50, NEON, alpha=prog(u, 2.4, .4))
-        text(img, "TÜM CEVAPLAR KANALDA", 46, W / 2, 1490, BLACK, alpha=prog(u, 2.4, .4), scale=k)
-    footer(img)
+    text(img, "ATP = hücrenin enerji parası", 50, W / 2, 1330, WHITE, alpha=prog(u, 1.5, .4))
+    cta(img, 1400, alpha=prog(u, 2.4, .4), scale=1 + 0.02 * math.sin(u * 6))
     return img
 
 

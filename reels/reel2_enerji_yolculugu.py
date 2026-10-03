@@ -10,10 +10,10 @@ GREENL = (60, 170, 90)
 BROWN = (196, 132, 60)
 
 NODES = [  # (x, y, title, caption)
-    (230, 470, "GÜNEŞ", "Işık enerjisi kaynağı"),
-    (230, 730, "BUĞDAY", "Fotosentezle besin üretir"),
-    (230, 990, "EKMEK", "Besinde kimyasal enerji depolu"),
-    (230, 1250, "HÜCRELERİN", "Solunumla ATP üretir"),
+    (230, 440, "GÜNEŞ", "Işık enerjisi kaynağı"),
+    (230, 660, "BUĞDAY", "Fotosentezle besin üretir"),
+    (230, 880, "EKMEK", "Besinde kimyasal enerji depolu"),
+    (230, 1100, "HÜCRELERİN", "Solunumla ATP üretir"),
 ]
 T_HOOK, SEG = 3.0, 3.1
 T_END = T_HOOK + SEG * 4 + 0.6
@@ -21,7 +21,7 @@ TOTAL = T_END + 4.2
 
 
 def icon(base, k, cx, cy, t, s):
-    r = int(105 * s)
+    r = int(98 * s)
     circle(base, cx, cy, r, WHITE)
     circle(base, cx, cy, r, None, outline=NAVY, width=6)
     d = ImageDraw.Draw(base)
@@ -118,14 +118,10 @@ def scene(t):
 
     if t >= T_END:
         u = t - T_END
-        rrect(img, (60, 1400, W - 60, 1540), 40, NAVY, alpha=0.96 * prog(u, 0, .3))
-        text(img, "Çoğu canlının enerjisi\nGÜNEŞ’ten gelir!", 56, W / 2, 1470, WHITE, maxw=900,
+        rrect(img, (60, 1245, W - 60, 1365), 40, NAVY, alpha=0.96 * prog(u, 0, .3))
+        text(img, "Çoğu canlının enerji kaynağı: GÜNEŞ", 46, W / 2, 1305, WHITE, maxw=900,
              scale=out_back(prog(u, 0, .5)), alpha=prog(u, 0, .3))
-        if u > 1.4:
-            k = 1 + 0.04 * math.sin(u * 7)
-            rrect(img, (W / 2 - 360 * k, 1580, W / 2 + 360 * k, 1580 + 100), 50, BLUE,
-                  alpha=prog(u, 1.4, .4))
-            text(img, "TÜM CEVAPLAR KANALDA", 46, W / 2, 1630, WHITE, alpha=prog(u, 1.4, .4), scale=k)
+        cta(img, 1400, alpha=prog(u, 1.4, .4), scale=1 + 0.02 * math.sin(u * 6), light=True)
     return img
 
 
