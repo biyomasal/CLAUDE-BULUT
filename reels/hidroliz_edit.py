@@ -18,7 +18,7 @@ WORK.mkdir(parents=True, exist_ok=True)
 
 PAL = dict(bg=((226, 224, 214), (238, 236, 228)), ink=(36, 36, 36), acc=(206, 56, 32), acc2=YELLOW, sat=False)
 HOOK_S, CTA_S = 2.6, 4.6
-CUT_IN, CUT_OUT, AUDIO_END = 9.3, 36.9, 38.4
+CUT_IN, CUT_OUT, AUDIO_END = 9.3, 36.55, 38.4
 
 
 def bg():
